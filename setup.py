@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="immutable",
+    name="immutable Python Type",
     version="1.0.0",
     description="A immutable type for Python",
     long_description="A library for create immuable 'type' in Python",
@@ -25,7 +25,7 @@ setup(
 
     ],
 
-    packages=['immutable'],
+    packages=['immutableType'],
     python_requires=">=3.9",
     include_package_data=True,
 )
