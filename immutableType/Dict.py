@@ -1,5 +1,6 @@
 from typing import Any
 from ._error import DictError, DictTypeError, DictTypeValueError, DictTypeKeyError
+from .List import List_
 
 class Dict_:
 
@@ -16,12 +17,12 @@ class Dict_:
             raise DictError(dictionary)
 
         self.__dict = dictionary
-        self.__check_types(dictionary)
+        self._check_types(dictionary)
         self.__dict = AttributDict(dictionary)
 
 
 
-    def __check_types(self, value) -> None:
+    def _check_types(self, value) -> None:
         """
         Check key and value type of "value" dictionary to self.types
         :param value: dict
@@ -67,12 +68,12 @@ class Dict_:
         if not isinstance(new_dict, dict):
             raise DictError(new_dict)
 
-        self.__check_types(new_dict)
+        self._check_types(new_dict)
 
         self.__dict = new_dict
 
 
-    def get(self, key: str | int | float) -> Any:
+    def get(self, key: Any) -> Any:
         """
         Get the value from a key
         :param key: str | int | float
@@ -80,19 +81,40 @@ class Dict_:
         """
         return self.__dict[key]
 
-
-    def set(self, key: Any, value: Any) -> None:
+    def set(self, key: list, value: Any) -> None:
         """
-        Set à value from a key
-        :param key: str | int | float
+        Set a value in a nested dictionary using a list of keys.
+        :param key: list of keys (str | int | float) representing the path in the nested dictionary
         :param value: Any
         :return: None
         """
+        d = self.__dict
 
-        self.__check_types({key: value})
+        for i in key[:-1]:
+            if isinstance(d, Dict_):
+                # Vérifiez les types dans Dict_
 
-        self.__dict[key] = value
+                # Si la clé n'existe pas, créer un nouveau Dict_
+                if i not in d.dict_:
+                    d.dict_[i] = Dict_({})
 
+                d._check_types(d.dict_)
+                # Descendre d'un niveau dans le dictionnaire
+                d = d.dict_[i]
+
+            else:
+                # Pour les dictionnaires standards
+                if i not in d:
+                    d[i] = {}
+                d = d[i]  # Descendre d'un niveau dans le dictionnaire
+            #print(d)
+
+
+        # Assigner la valeur à la clé finale
+        if isinstance(d, Dict_):
+            d.dict_[key[-1]] = value
+        else:
+            d[key[-1]] = value
 
 
 

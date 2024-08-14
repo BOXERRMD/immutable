@@ -1,8 +1,21 @@
 from immutableType import *
 
-t = Convert({"test": "coucou", "liste": [1,2,3,4,5]}).get()
+myDict2 = Dict_({'key2': Dict_({'key3': {}})})
+
+myDict2.set(['key2', 'key3'], Str_("hello"))
+
+'''print(myDict2.dict_)
 
 
-print(t.dict_)
+print(myDict2.dict_)
+print(myDict2.dict_['key2'].dict_)
+print(myDict2.dict_['key2'].dict_['key3'])'''
+
+print(myDict2.dict_)
+print(myDict2.dict_.key2.dict_)
+print(myDict2.dict_.key2.dict_.key3)
+
+#myDict2.dict_['key2'] = 3
+
 
 
