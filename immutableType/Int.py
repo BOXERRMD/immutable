@@ -17,7 +17,7 @@ class Int_:
         self.__integer = new_value
 
     def __str__(self):
-        return self.__integer
+        return str(self.__integer)
 
     def __int__(self):
         return self.__integer

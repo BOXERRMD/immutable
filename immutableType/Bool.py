@@ -20,7 +20,7 @@ class Bool_:
         self.__boolean = new_value
 
     def __str__(self):
-        return self.__boolean
+        return str(self.__boolean)
 
     def __bool__(self):
         return self.__boolean

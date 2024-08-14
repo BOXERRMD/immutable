@@ -1,5 +1,6 @@
-from ._error import DictError, DictTypeError, DictTypeValueError, DictTypeKeyError
 from typing import Any
+from ._error import DictError, DictTypeError, DictTypeValueError, DictTypeKeyError
+
 class Dict_:
 
     def __init__(self, dictionary: dict = {}, types: list[list[type], type] = None):
@@ -16,6 +17,8 @@ class Dict_:
 
         self.__dict = dictionary
         self.__check_types(dictionary)
+        self.__dict = AttributDict(dictionary)
+
 
 
     def __check_types(self, value) -> None:
@@ -50,9 +53,10 @@ class Dict_:
                 raise e
 
             if vd not in self.__types[1:]:
-                e = DictTypeValueError(self.__types[1:], self.__dict, key)
+                e = DictTypeValueError(self.__types[1:], self.__dict, value_dic)
                 e.add_note(f"{vd.__name__} is not an accepted value type")
                 raise e
+
 
     @property
     def dict_(self):
@@ -77,7 +81,7 @@ class Dict_:
         return self.__dict[key]
 
 
-    def set(self, key: str | int | float, value: Any) -> None:
+    def set(self, key: Any, value: Any) -> None:
         """
         Set à value from a key
         :param key: str | int | float
@@ -92,4 +96,20 @@ class Dict_:
 
 
 
+class AttributDict(dict):
+    def __getattr__(self, key):
+        if key in self:
+            value = self[key]
+            if isinstance(value, dict):
+                return AttributDict(value)  # Convertir les sous-dictionnaires aussi
+            return value
+        raise AttributeError(f"'AttributDict' object has no attribute '{key}'")
 
+    def __setattr__(self, key, value):
+        self[key] = value
+
+    def __delattr__(self, key):
+        if key in self:
+            del self[key]
+        else:
+            raise AttributeError(f"'AttributDict' object has no attribute '{key}'")
