@@ -51,3 +51,8 @@ class DictTypeValueError(NotMutableTypeError):
 
     def __init__(self, types, default_value, new_value) -> None:
         super().__init__(f"Expected {', '.join([i.__name__ for i in types if i != None])} value types in {default_value}, not {type(new_value).__name__}")
+
+class DictKeyError(NotMutableTypeError):
+
+    def __init__(self, value) -> None:
+        super().__init__(f"KeyError : {value}")

@@ -1,5 +1,5 @@
 from typing import Any
-from ._error import DictError, DictTypeError, DictTypeValueError, DictTypeKeyError
+from ._error import DictError, DictTypeValueError, DictTypeKeyError, DictKeyError
 from .List import List_
 
 class Dict_:
@@ -73,15 +73,32 @@ class Dict_:
         self.__dict = new_dict
 
 
-    def get(self, key: Any) -> Any:
+    def get(self, keys: list[Any]) -> Any:
         """
         Get the value from a key
         :param key: str | int | float
         :return: Any
         """
-        return self.__dict[key]
+        d = self.__dict
 
-    def set(self, key: list, value: Any) -> None:
+        for i in keys:
+
+            if isinstance(d, Dict_):
+
+                if i not in d.dict_.keys():
+                    raise DictKeyError(i)
+
+                d = d.dict_[i]
+
+            else:
+                if i not in d.keys():
+                    raise DictKeyError(i)
+
+                d = d[i]
+
+        return d
+
+    def set(self, keys: list[Any], value: Any) -> None:
         """
         Set a value in a nested dictionary using a list of keys.
         :param key: list of keys (str | int | float) representing the path in the nested dictionary
@@ -90,12 +107,12 @@ class Dict_:
         """
         d = self.__dict
 
-        for i in key[:-1]:
+        for i in keys[:-1]:
             if isinstance(d, Dict_):
                 # Vérifiez les types dans Dict_
 
                 # Si la clé n'existe pas, créer un nouveau Dict_
-                if i not in d.dict_:
+                if i not in d.dict_.keys():
                     d.dict_[i] = Dict_({})
 
                 d._check_types(d.dict_)
@@ -112,9 +129,9 @@ class Dict_:
 
         # Assigner la valeur à la clé finale
         if isinstance(d, Dict_):
-            d.dict_[key[-1]] = value
+            d.dict_[keys[-1]] = value
         else:
-            d[key[-1]] = value
+            d[keys[-1]] = value
 
 
 
