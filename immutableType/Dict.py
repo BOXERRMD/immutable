@@ -1,6 +1,5 @@
 from typing import Any
 from ._error import DictError, DictTypeValueError, DictTypeKeyError, DictKeyError
-from .List import List_
 
 class Dict_:
 
@@ -22,7 +21,7 @@ class Dict_:
 
 
 
-    def _check_types(self, value) -> None:
+    def _check_types(self, value: dict) -> None:
         """
         Check key and value type of "value" dictionary to self.types
         :param value: dict
@@ -124,11 +123,11 @@ class Dict_:
                 if i not in d:
                     d[i] = {}
                 d = d[i]  # Descendre d'un niveau dans le dictionnaire
-            #print(d)
 
 
         # Assigner la valeur à la clé finale
         if isinstance(d, Dict_):
+            d._check_types({keys[-1]: value})
             d.dict_[keys[-1]] = value
         else:
             d[keys[-1]] = value

@@ -1,11 +1,11 @@
 from immutableType import *
 
-myDict2 = Dict_({'key2': Dict_({'key3': {}})})
+myDict2 = Dict_({'key2': Dict_({'key3': 'value3'})})
 
-myDict2.set(['key2', 'ok'], Str_("hello"))
+print(myDict2.dict_['key2']) # print : <immutableType.Dict.Dict_ object at ...>
 
-
-print(myDict2.get(['key2', 'ok']))
+myDict2.set(['key2', 'key3'], 'coucou')
+print(myDict2.dict_['key2'].dict_)
 
 #myDict2.dict_['key2'] = 3
 
