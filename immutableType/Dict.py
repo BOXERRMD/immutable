@@ -1,9 +1,9 @@
-from typing import Any
+from typing import Any, Union, Type
 from ._error import DictError, DictTypeValueError, DictTypeKeyError, DictKeyError
 
 class Dict_:
 
-    def __init__(self, dictionary: dict = {}, types: list[list[type], type] = None):
+    def __init__(self, dictionary: dict = {}, types: list[list[Type[Union[int, str, float, bool, tuple]]], Any] = None):
         """
         Setup a dictionary and types.
         :param dictionary: dict
@@ -72,7 +72,7 @@ class Dict_:
         self.__dict = new_dict
 
 
-    def get(self, keys: list[Any]) -> Any:
+    def get(self, keys: Union[list[Union[str, int, tuple, float, bool]]]) -> Any:
         """
         Get the value from a key
         :param key: str | int | float
@@ -97,7 +97,7 @@ class Dict_:
 
         return d
 
-    def set(self, keys: list[Any], value: Any) -> None:
+    def set(self, keys: list[Union[str, int, tuple, float, bool]], value: Any) -> None:
         """
         Set a value in a nested dictionary using a list of keys.
         :param key: list of keys (str | int | float) representing the path in the nested dictionary
