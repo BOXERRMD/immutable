@@ -1,9 +1,10 @@
 from sys import maxsize
+from typing import Any
 
 from ._error import TupleError
 class Tuple_:
 
-    def __init__(self, _tuple: tuple):
+    def __init__(self, _tuple: tuple[Any]):
 
         if not isinstance(_tuple, tuple):
             raise TupleError(_tuple)
