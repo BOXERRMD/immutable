@@ -20,7 +20,7 @@ class BoolError(NotMutableTypeError):
 class TupleError(NotMutableTypeError):
 
     def __init__(self, value) -> None:
-        super().__init__(f"Expected a boolean, got {type(value).__name__}")
+        super().__init__(f"Expected a tuple, got {type(value).__name__}")
 
 class ListError(NotMutableTypeError):
 
