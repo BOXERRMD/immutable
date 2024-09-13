@@ -20,6 +20,9 @@ class Dict_:
         self.__dict = AttributDict(dictionary)
 
 
+    def __getitem__(self, item):
+        return self.__dict[item]
+
 
     def _check_types(self, value: dict) -> None:
         """
