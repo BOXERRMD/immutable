@@ -22,5 +22,8 @@ class Int_:
     def __int__(self):
         return self.__integer
 
+    def __bool__(self):
+        return True if self.__integer else False
+
     def __repr__(self):
         return f"Int({self.__integer!r})"

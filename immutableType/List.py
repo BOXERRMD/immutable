@@ -1,5 +1,5 @@
 from sys import maxsize
-
+from .Int import Int_
 from ._error import ListError, ListTypeError
 from typing import Any
 class List_:
@@ -15,9 +15,29 @@ class List_:
         self.__check_types(_list)
 
 
+    def __len__(self):
+        return len(self.__list)
+
+    def __getitem__(self, item: int):
+        i = Int_(item)
+        return self.__list[i.int_]
+
+    def __bool__(self):
+        return True if self.__list else False
+
+    def __setitem__(self, key: int, value):
+
+        self.__check_types([value])
+        u = Int_(key)
+        self.__list[u.int_] = value
+
+    def __delitem__(self, key: int):
+        u = Int_(key)
+        del self.__list[u.int_]
 
 
-    def __check_types(self, value) -> None:
+
+    def __check_types(self, value: list) -> None:
         """
         Look if all types is in self.__types
         :param value: iterable

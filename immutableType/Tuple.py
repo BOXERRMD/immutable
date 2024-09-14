@@ -11,6 +11,12 @@ class Tuple_:
 
         self.__tuple = _tuple
 
+    def __len__(self):
+        return len(self.__tuple)
+
+    def __bool__(self):
+        return True if self.__tuple else False
+
     @property
     def tuple_(self) -> tuple:
         return self.__tuple

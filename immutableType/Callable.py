@@ -5,6 +5,19 @@ from ._error import CallableError, CallableTypeError, CallableKwargsKeyError, Ca
 from inspect import getmembers, signature
 
 
+
+'''
+Créer un décorateur pour pouvoir gérer les types entré dans la fonction automatiquement sans avoir à les définir.
+
+EX :
+
+@callable(args_types = [...], kwargs_types = {...})
+def test(a:int, b = True)
+'''
+
+
+
+
 class Callable_:
 
     def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str | Type] = {}):
@@ -70,3 +83,15 @@ class Callable_:
 
             if type(value) not in kwargs_types[key]:
                 raise CallableKwargsValueTypeError(kwargs_types[key], value, key, self.__callable)
+
+
+# Decorator from func
+def callable_(args_types: list[Type] = [], kwargs_types: dict[str | Type] = {}):
+    def call(func):
+        def call_Callable(*args, **kwargs):
+
+            return Callable_(func, args_types=args_types, kwargs_types=kwargs_types).call(*args, **kwargs)
+
+        return call_Callable
+
+    return call

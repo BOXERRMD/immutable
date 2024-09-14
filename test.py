@@ -1,8 +1,10 @@
 from immutableType import *
 
-def test(arg1: int, arg2: int):
 
-    print(arg1 + arg2)
+@callable_(args_types=[List_])
+def test(l: List_):
+
+    return l[1]
 
 
-Callable_(test, args_types=[int, str]).call(1, 5)
+print(len(Dict_({'coucou': 1, 2: 5})))

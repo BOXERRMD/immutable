@@ -21,5 +21,11 @@ class Str_:
     def __str__(self):
         return self.__string
 
+    def __len__(self):
+        return len(self.__string)
+
+    def __bool__(self):
+        return True if self.__string else False
+
     def __repr__(self):
         return f"Str({self.__string!r})"

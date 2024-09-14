@@ -23,6 +23,12 @@ class Dict_:
     def __getitem__(self, item):
         return self.__dict[item]
 
+    def __bool__(self):
+        return True if self.__dict else False
+
+    def __len__(self):
+        return len(self.__dict)
+
 
     def _check_types(self, value: dict) -> None:
         """

@@ -2,10 +2,10 @@ from setuptools import setup
 
 setup(
     name="immutable-Python-Type",
-    version="1.0.9",
+    version="1.1.0",
     description="A immutable type for Python",
     long_description="A library for create immuable 'type' in Python.\n"
-                     "Support types : Str, Int, Bool, Tuple, List, Dict.",
+                     "Support types : Str, Int, Bool, Tuple, List, Dict, Callable",
     author="BOXER",
     author_email="vagabonwalybi@gmail.com",
     maintainer="BOXER",
