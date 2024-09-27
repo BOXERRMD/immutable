@@ -2,25 +2,16 @@ from .List import List_
 from .Dict import Dict_
 from typing import Callable, Any, Type
 from ._error import CallableError, CallableTypeError, CallableKwargsKeyError, CallableKwargsValueTypeError
-from inspect import getmembers, signature
 
 
 
-'''
-Créer un décorateur pour pouvoir gérer les types entré dans la fonction automatiquement sans avoir à les définir.
-
-EX :
-
-@callable(args_types = [...], kwargs_types = {...})
-def test(a:int, b = True)
-'''
 
 
 
 
 class Callable_:
 
-    def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str | Type] = {}):
+    def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str | list[Type]] = {}, is_class = False):
         """
         Define a immutable object from a callable to setup immutable params in callable.
         :param _callable: Callable (func, class)
@@ -34,6 +25,7 @@ class Callable_:
 
 
         self.__callable = _callable
+        self.__is_class= is_class
         self.__args_types = List_(args_types)
         self.__kwargs_types = Dict_(kwargs_types)
 
@@ -62,7 +54,10 @@ class Callable_:
 
         for i in range(len(args)):
 
-            if type(args[i]) not in self.__args_types.list_:
+            if self.__is_class and i == 0:
+                pass
+
+            elif type(args[i]) not in self.__args_types.list_:
 
                 raise CallableTypeError(self.__args_types.list_, self.__callable.__name__, args[i], i)
 
@@ -86,11 +81,29 @@ class Callable_:
 
 
 # Decorator from func
-def callable_(args_types: list[Type] = [], kwargs_types: dict[str | Type] = {}):
+def callable_(args_types: list[Type] = [], kwargs_types: dict[str | list[Type]] = {}, is_class: bool = False):
+    """
+Decorator for callable types.
+
+Use this to limit types in a function call.
+
+:param args_types: A list of types allowed in positional arguments.
+:param kwargs_types: A dict of kwargs names and their allowed types.
+:param is_class: Set to True if the decorator is used on a function in a class.
+
+Example:
+
+    @callable(args_types=[add], kwargs_types={"arg1": [int, float], "arg2": [int, float]})
+
+    def addFunc(operator, arg1=0, arg2=0):
+        return operator(arg1, arg2)
+
+"""
+
     def call(func):
         def call_Callable(*args, **kwargs):
 
-            return Callable_(func, args_types=args_types, kwargs_types=kwargs_types).call(*args, **kwargs)
+            return Callable_(func, args_types=args_types, kwargs_types=kwargs_types, is_class=is_class).call(*args, **kwargs)
 
         return call_Callable
 
