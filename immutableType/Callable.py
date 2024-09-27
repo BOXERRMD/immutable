@@ -16,6 +16,7 @@ class Callable_:
         Define a immutable object from a callable to setup immutable params in callable.
         :param _callable: Callable (func, class)
         :param params_type: list[Any] -> reload into a immutable List_
+        :param is_class: Set to True if is used on a function in a class.
         """
 
         if not callable(_callable):
