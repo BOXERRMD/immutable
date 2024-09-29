@@ -1,4 +1,5 @@
 from ._error import StrError
+from .Int import Int_
 class Str_:
     def __init__(self, string: str) -> None:
 
@@ -29,3 +30,10 @@ class Str_:
 
     def __repr__(self):
         return f"Str({self.__string!r})"
+
+    def __iter__(self):
+        return iter(self.__string)
+
+    def __getitem__(self, item):
+        i = Int_(item)
+        return self.__string[i.int_]

@@ -35,6 +35,9 @@ class List_:
         u = Int_(key)
         del self.__list[u.int_]
 
+    def __iter__(self):
+        return iter(self.__list)
+
 
 
     def __check_types(self, value: list) -> None:

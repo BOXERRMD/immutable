@@ -16,7 +16,4 @@ class operation():
 
         self.num1.int_ = newNum
 
-
-op = operation(1, 4)
-print(op.add())
-op.change_num1(True)
+print(1234[2])

@@ -11,9 +11,9 @@ from ._error import CallableError, CallableTypeError, CallableKwargsKeyError, Ca
 
 class Callable_:
 
-    def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str | list[Type]] = {}, is_class = False):
+    def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str | list[Type]] = {}, is_class: bool = False):
         """
-        Define a immutable object from a callable to setup immutable params in callable.
+        Define an immutable object from a callable to setup immutable params in callable.
         :param _callable: Callable (func, class)
         :param params_type: list[Any] -> reload into a immutable List_
         :param is_class: Set to True if is used on a function in a class.

@@ -17,6 +17,15 @@ class Tuple_:
     def __bool__(self):
         return True if self.__tuple else False
 
+    def __iter__(self):
+        return iter(self.__tuple)
+
+    def __str__(self):
+        return str(self.__tuple)
+
+    def __repr__(self):
+        return f"Tuple({self.__tuple!r})"
+
     @property
     def tuple_(self) -> tuple:
         return self.__tuple
@@ -27,12 +36,6 @@ class Tuple_:
             raise TupleError(new_tuple)
 
         self.__tuple = new_tuple
-
-    def __str__(self):
-        return str(self.__tuple)
-
-    def __repr__(self):
-        return f"Tuple({self.__tuple!r})"
 
     def index(self, __value, __start: int = 0, __stop: int = maxsize) -> int:
         """

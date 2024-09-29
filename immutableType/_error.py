@@ -80,3 +80,5 @@ class CallableKwargsValueTypeError(NotMutableTypeError):
 
     def __init__(self, values, value, arg, func) -> None:
         super().__init__(f"Expected {', '.join([i.__name__ for i in values])}, got {type(value).__name__} for '{arg}' param in '{func.__name__}' function")
+
+

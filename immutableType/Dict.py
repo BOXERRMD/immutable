@@ -29,6 +29,9 @@ class Dict_:
     def __len__(self):
         return len(self.__dict)
 
+    def __iter__(self):
+        return iter(self.__dict)
+
 
     def _check_types(self, value: dict) -> None:
         """

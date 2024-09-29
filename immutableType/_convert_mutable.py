@@ -27,7 +27,7 @@ class Convert:
 
         elif isinstance(value, tuple):
             # Si la valeur est un tuple, convertir chaque élément en immuable
-            return Tuple_((self.__make_immutable(v) for v in value))
+            return Tuple_(tuple([self.__make_immutable(v) for v in value]))
 
         elif isinstance(value, int):
             # Si la valeur est un integer, convertir l'élément en immuable
@@ -43,9 +43,10 @@ class Convert:
 
 
         else:
-            # Si la valeur est un type de base (int, str, float, etc.), on la laisse telle quelle
+            #sinon retourne la valeur par défaut
             return value
 
+    @property
     def get(self) -> Callable:
         """
         Get all types immutable
