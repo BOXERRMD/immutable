@@ -1,8 +1,9 @@
+from ._error import IntError
 class Int_:
     def __init__(self, integer: int) -> None:
 
         if not isinstance(integer, int):
-            raise TypeError(f"Expected a integer, got {type(integer).__name__}")
+            raise IntError(integer)
 
         self.__integer = integer
 
@@ -13,7 +14,7 @@ class Int_:
     @int_.setter
     def int_(self, new_value):
         if not isinstance(new_value, int):
-            raise TypeError(f"Expected a integer, got {type(new_value).__name__}")
+            raise IntError(new_value)
         self.__integer = new_value
 
     def __str__(self):

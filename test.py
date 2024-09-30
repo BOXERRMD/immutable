@@ -3,7 +3,7 @@ from immutableType import *
 
 class operation():
 
-    @callable_(args_types=[int], is_class=True)
+    @callable_(args_types=[int, str], is_class=True)
     def __init__(self, num1, num2):
         self.num1 = Int_(num1)
         self.num2 = Int_(num2)
@@ -11,9 +11,11 @@ class operation():
     def add(self):
         return self.num1.int_ + self.num2.int_
 
-    @callable_(args_types=[int], is_class=True)
+    @callable_(args_types=[NoneType], is_class=True)
     def change_num1(self, newNum):
 
         self.num1.int_ = newNum
 
-print(1234[2])
+u = operation(1, 2)
+u.change_num1(12546.546)
+print(u.add())
