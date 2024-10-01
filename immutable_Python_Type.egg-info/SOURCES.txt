@@ -1,0 +1,17 @@
+LICENSE
+pyproject.toml
+setup.py
+immutableType/Bool.py
+immutableType/Callable.py
+immutableType/Dict.py
+immutableType/Int.py
+immutableType/List.py
+immutableType/Str.py
+immutableType/Tuple.py
+immutableType/__init__.py
+immutableType/_convert_mutable.py
+immutableType/_error.py
+immutable_Python_Type.egg-info/PKG-INFO
+immutable_Python_Type.egg-info/SOURCES.txt
+immutable_Python_Type.egg-info/dependency_links.txt
+immutable_Python_Type.egg-info/top_level.txt

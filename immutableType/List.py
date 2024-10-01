@@ -1,10 +1,10 @@
 from sys import maxsize
 from .Int import Int_
 from ._error import ListError, ListTypeError
-from typing import Any
+from typing import Any, Type
 class List_:
 
-    def __init__(self, _list: list[Any] = [], types: list[type] = None):
+    def __init__(self, _list: list[Any] = [], types: list[Type] = None):
 
         self.__types = types
 

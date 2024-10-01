@@ -1,6 +1,6 @@
 from .List import List_
 from .Dict import Dict_
-from typing import Callable, Any, Type
+from typing import Callable, Any, Type, Union
 from ._error import CallableError, CallableTypeError, CallableKwargsKeyError, CallableKwargsValueTypeError
 
 
@@ -11,7 +11,7 @@ from ._error import CallableError, CallableTypeError, CallableKwargsKeyError, Ca
 
 class Callable_:
 
-    def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str | list[Type]] = {}, is_class: bool = False):
+    def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[Union[str, list[Type]]] = {}, is_class: bool = False):
         """
         Define an immutable object from a callable to setup immutable params in callable.
         :param _callable: Callable (func, class)
@@ -82,7 +82,7 @@ class Callable_:
 
 
 # Decorator from func
-def callable_(args_types: list[Type] = [], kwargs_types: dict[str | list[Type]] = {}, is_class: bool = False):
+def callable_(args_types: list[Type] = [], kwargs_types: dict[Union[str, list[Type]]] = {}, is_class: bool = False):
     """
 Decorator for callable types.
 

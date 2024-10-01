@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: immutable-Python-Type
+Version: 1.1.4
+Summary: A immutable type for Python
+Home-page: https://github.com/BOXERRMD/immutable
+Author: BOXER
+Author-email: vagabonwalybi@gmail.com
+Maintainer: BOXER
+Maintainer-email: vagabonwalybi@gmail.com
+Project-URL: Documentation, https://github.com/BOXERRMD/immutable/wiki
+Project-URL: GitHub, https://github.com/BOXERRMD/immutable
+Classifier: Programming Language :: Python :: 3.11
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: Microsoft :: Windows :: Windows 11
+Classifier: Operating System :: Microsoft :: Windows :: Windows 10
+Requires-Python: >=3.9
+License-File: LICENSE
+
+A library for create immuable 'type' in Python.
+Support types : Str, Int, Bool, Tuple, List, Dict, Callable
