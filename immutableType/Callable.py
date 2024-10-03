@@ -1,6 +1,6 @@
 from .List import List_
 from .Dict import Dict_
-from typing import Callable, Any, Type, Union
+from typing import Callable, Any, Type
 from ._error import CallableError, CallableTypeError, CallableKwargsKeyError, CallableKwargsValueTypeError
 
 
@@ -38,8 +38,6 @@ class Callable_:
         :return: Any
         :raises CallableTypeError, CallableKwargsKeyError, CallableKwargsValueTypeError: ``CallableTypeError`` -> positional type argument not found in **[[HERE], {...}]** ``CallableKwargsKeyError`` -> Key not found **[[...], {'HERE': ...]]** ``CallableKwargsValueTypeError`` -> Type value not found **[[...], {'...': [HERE]}]**
         """
-        print(args)
-        print(kwargs)
         self.__check_args(args)
         self.__check_kwargs(kwargs)
 
