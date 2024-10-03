@@ -11,7 +11,7 @@ from ._error import CallableError, CallableTypeError, CallableKwargsKeyError, Ca
 
 class Callable_:
 
-    def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[Union[str, list[Type]]] = {}, is_class: bool = False):
+    def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str, list[Type]] = {}, is_class: bool = False):
         """
         Define an immutable object from a callable to setup immutable params in callable.
         :param _callable: Callable (func, class)
@@ -30,7 +30,6 @@ class Callable_:
         self.__args_types = List_(args_types)
         self.__kwargs_types = Dict_(kwargs_types)
 
-
     def call(self, *args, **kwargs) -> Any:
         """
         Check all params and call the function
@@ -39,7 +38,8 @@ class Callable_:
         :return: Any
         :raises CallableTypeError, CallableKwargsKeyError, CallableKwargsValueTypeError: ``CallableTypeError`` -> positional type argument not found in **[[HERE], {...}]** ``CallableKwargsKeyError`` -> Key not found **[[...], {'HERE': ...]]** ``CallableKwargsValueTypeError`` -> Type value not found **[[...], {'...': [HERE]}]**
         """
-
+        print(args)
+        print(kwargs)
         self.__check_args(args)
         self.__check_kwargs(kwargs)
 
@@ -82,7 +82,7 @@ class Callable_:
 
 
 # Decorator from func
-def callable_(args_types: list[Type] = [], kwargs_types: dict[Union[str, list[Type]]] = {}, is_class: bool = False):
+def callable_(args_types: list[Type] = [], kwargs_types: dict[str, list[Type]] = {}, is_class: bool = False):
     """
 Decorator for callable types.
 
