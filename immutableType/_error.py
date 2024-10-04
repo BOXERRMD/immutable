@@ -1,4 +1,3 @@
-from rich import color
 
 class NotMutableTypeError(Exception):
     pass
