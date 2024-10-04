@@ -14,7 +14,7 @@ class Callable_:
     def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str, list[Type]] = {}, is_class: bool = False):
         """
         Define an immutable object from a callable to setup immutable params in callable.
-        
+
         Use this to limit types in a function call.
 
         :param args_types: A list of types allowed in positional arguments.
