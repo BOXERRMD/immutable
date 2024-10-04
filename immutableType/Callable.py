@@ -38,8 +38,11 @@ class Callable_:
         :return: Any
         :raises CallableTypeError, CallableKwargsKeyError, CallableKwargsValueTypeError: ``CallableTypeError`` -> positional type argument not found in **[[HERE], {...}]** ``CallableKwargsKeyError`` -> Key not found **[[...], {'HERE': ...]]** ``CallableKwargsValueTypeError`` -> Type value not found **[[...], {'...': [HERE]}]**
         """
-        self.__check_args(args)
-        self.__check_kwargs(kwargs)
+        if args:
+            self.__check_args(args)
+            
+        if kwargs:
+            self.__check_kwargs(kwargs)
 
         return self.__callable(*args, **kwargs)
 
