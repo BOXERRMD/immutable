@@ -14,9 +14,12 @@ class Callable_:
     def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str, list[Type]] = {}, is_class: bool = False):
         """
         Define an immutable object from a callable to setup immutable params in callable.
-        :param _callable: Callable (func, class)
-        :param params_type: list[Any] -> reload into a immutable List_
-        :param is_class: Set to True if is used on a function in a class.
+        
+        Use this to limit types in a function call.
+
+        :param args_types: A list of types allowed in positional arguments.
+        :param kwargs_types: dict types of kwargs arguments authorized (Ex : {'myParam': [int, float], 'myOtherParam': [str, NoneType]})
+        :param is_class: Set to True if is used on a class function.
         """
 
         if not callable(_callable):
@@ -26,7 +29,7 @@ class Callable_:
 
 
         self.__callable = _callable
-        self.__is_class= is_class
+        self.__is_class = is_class
         self.__args_types = List_(args_types)
         self.__kwargs_types = Dict_(kwargs_types)
 
@@ -40,7 +43,7 @@ class Callable_:
         """
         if args:
             self.__check_args(args)
-            
+
         if kwargs:
             self.__check_kwargs(kwargs)
 
