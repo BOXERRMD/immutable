@@ -32,6 +32,8 @@ class Dict_:
     def __iter__(self):
         return iter(self.__dict)
 
+    def __eq__(self, other):
+        return self.__dict == other
 
     def _check_types(self, value: dict) -> None:
         """

@@ -26,6 +26,9 @@ class Tuple_:
     def __repr__(self):
         return f"Tuple({self.__tuple!r})"
 
+    def __eq__(self, other):
+        return self.__tuple == other
+
     @property
     def tuple_(self) -> tuple:
         return self.__tuple

@@ -25,6 +25,9 @@ class Bool_:
     def __bool__(self):
         return self.__boolean
 
+    def __eq__(self, other):
+        return self.bool_ == other
+
     def __repr__(self):
         return f"Bool({self.__boolean!r})"
 

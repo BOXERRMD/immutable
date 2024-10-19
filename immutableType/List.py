@@ -38,7 +38,8 @@ class List_:
     def __iter__(self):
         return iter(self.__list)
 
-
+    def __eq__(self, other):
+        return self.__list == other
 
     def __check_types(self, value: list) -> None:
         """

@@ -34,6 +34,9 @@ class Str_:
     def __iter__(self):
         return iter(self.__string)
 
+    def __eq__(self, other):
+        return self.str_ == other
+
     def __getitem__(self, item):
         i = Int_(item)
         return self.__string[i.int_]

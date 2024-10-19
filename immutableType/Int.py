@@ -28,3 +28,6 @@ class Int_:
 
     def __repr__(self):
         return f"Int({self.__integer!r})"
+
+    def __eq__(self, other):
+        return self.__integer == other
