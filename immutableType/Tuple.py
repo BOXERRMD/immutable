@@ -1,10 +1,17 @@
 from sys import maxsize
-from typing import Any
+from typing import Any, final
+from ._error import TupleError, SubClassError
+from .Subclass import notSubclass
 
-from ._error import TupleError
+@notSubclass
+@final
 class Tuple_:
 
     def __init__(self, _tuple: tuple[Any]):
+        """
+        Create immutable tuple type
+        :param _tuple: a tuple
+        """
 
         if not isinstance(_tuple, tuple):
             raise TupleError(_tuple)
@@ -29,12 +36,30 @@ class Tuple_:
     def __eq__(self, other):
         return self.__tuple == other
 
+    def __and__(self, other):
+        return self.__bool__() == other
+
+    def __or__(self, other):
+        return self.__bool__() != other
+
+    def __init_subclass__(cls, **kwargs):
+        raise SubClassError(cls)
+
     @property
     def tuple_(self) -> tuple:
+        """
+        Return actual value
+        :return: tuple
+        """
         return self.__tuple
 
     @tuple_.setter
     def tuple_(self, new_tuple):
+        """
+        Set a new value
+        :param new_tuple: Any
+        :return: None
+        """
         if not isinstance(new_tuple, tuple):
             raise TupleError(new_tuple)
 

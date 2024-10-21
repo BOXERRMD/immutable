@@ -1,10 +1,19 @@
 from sys import maxsize
 from .Int import Int_
-from ._error import ListError, ListTypeError
-from typing import Any, Type
+from ._error import ListError, ListTypeError, SubClassError
+from typing import Any, Type, final
+from .Subclass import notSubclass
+
+@notSubclass
+@final
 class List_:
 
     def __init__(self, _list: list[Any] = [], types: list[Type] = None):
+        """
+        Create immutable list type
+        :param _list: a list
+        :param types: All accepted types for the list
+        """
 
         self.__types = types
 
@@ -41,6 +50,21 @@ class List_:
     def __eq__(self, other):
         return self.__list == other
 
+    def __and__(self, other):
+        return self.__bool__() == other
+
+    def __or__(self, other):
+        return self.__bool__() != other
+
+    def __init_subclass__(cls, **kwargs):
+        raise SubClassError(cls)
+
+    def __str__(self):
+        return str(self.__list)
+
+    def __repr__(self):
+        return f"List({self.__list!r})"
+
     def __check_types(self, value: list) -> None:
         """
         Look if all types is in self.__types
@@ -69,23 +93,25 @@ class List_:
 
     @property
     def list_(self) -> list:
+        """
+        Return actual value
+        :return: list
+        """
         return self.__list
 
     @list_.setter
     def list_(self, new_list):
-
+        """
+        Set a new value
+        :param new_value: Any
+        :return: None
+        """
         if not isinstance(new_list, list):
             raise ListError(new_list)
 
         self.__check_types(new_list)
 
         self.__list = new_list
-
-    def __str__(self):
-        return str(self.__list)
-
-    def __repr__(self):
-        return f"List({self.__list!r})"
 
 
     def append(self, __object) -> None:

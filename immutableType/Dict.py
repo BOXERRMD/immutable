@@ -1,12 +1,15 @@
-from typing import Any, Union, Type
-from ._error import DictError, DictTypeValueError, DictTypeKeyError, DictKeyError
+from typing import Any, Union, Type, final
+from ._error import DictError, DictTypeValueError, DictTypeKeyError, DictKeyError, SubClassError
+from .Subclass import notSubclass
 
+@notSubclass
+@final
 class Dict_:
 
     def __init__(self, dictionary: dict = {}, types: list[list[Type[Union[int, str, float, bool, tuple]]], Any] = None):
         """
-        Setup a dictionary and types.
-        :param dictionary: dict
+        Create immutable dict type
+        :param dictionary: a dict
         :param types: list[list[type key], type values]
         """
 
@@ -34,6 +37,15 @@ class Dict_:
 
     def __eq__(self, other):
         return self.__dict == other
+
+    def __and__(self, other):
+        return self.__bool__() == other
+
+    def __or__(self, other):
+        return self.__bool__() != other
+
+    def __init_subclass__(cls, **kwargs):
+        raise SubClassError(cls)
 
     def _check_types(self, value: dict) -> None:
         """
@@ -73,11 +85,20 @@ class Dict_:
 
 
     @property
-    def dict_(self):
+    def dict_(self) -> dict:
+        """
+        Return actual value
+        :return: dict
+        """
         return self.__dict
 
     @dict_.setter
     def dict_(self, new_dict):
+        """
+        Set a new value
+        :param new_value: Any
+        :return: None
+        """
         if not isinstance(new_dict, dict):
             raise DictError(new_dict)
 

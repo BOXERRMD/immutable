@@ -1,6 +1,4 @@
 from immutableType import *
 
-print(Bool_(False) != Str_(''))
-
-
-
+class test(Set_):
+    pass

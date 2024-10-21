@@ -2,6 +2,9 @@
 class NotMutableTypeError(Exception):
     pass
 
+class ClassMutableError(Exception):
+    pass
+
 
 class StrError(NotMutableTypeError):
 
@@ -81,3 +84,17 @@ class CallableKwargsValueTypeError(NotMutableTypeError):
         super().__init__(f"Expected {', '.join([i.__name__ for i in values])}, got {type(value).__name__} for '{arg}' param in '{func.__name__}' function")
 
 
+class SetError(NotMutableTypeError):
+    def __init__(self, value) -> None:
+        super().__init__(f"Expected a set, got {type(value).__name__}")
+
+class SetTypeError(NotMutableTypeError):
+
+    def __init__(self, types, default_value, new_value) -> None:
+        super().__init__(f"Expected {', '.join([i.__name__ for i in types if i != None])} types in {default_value}, not {type(new_value).__name__}")
+
+
+class SubClassError(ClassMutableError):
+
+    def __init__(self, cls: classmethod):
+        super().__init__(f"'{cls.__name__}' cannot be subclassed !")

@@ -1,7 +1,16 @@
-from ._error import StrError
+from ._error import StrError, SubClassError
 from .Int import Int_
+from typing import final
+from .Subclass import notSubclass
+
+@notSubclass
+@final
 class Str_:
     def __init__(self, string: str) -> None:
+        """
+        Create immutable str type
+        :param string: a string
+        """
 
         if not isinstance(string, str):
             raise StrError(string)
@@ -10,10 +19,19 @@ class Str_:
 
     @property
     def str_(self) -> str:
+        """
+        Return actual value
+        :return: str
+        """
         return self.__string
 
     @str_.setter
     def str_(self, new_value):
+        """
+        Set a new value
+        :param new_value: a string
+        :return: None
+        """
         if not isinstance(new_value, str):
             raise StrError(new_value)
 
@@ -36,6 +54,15 @@ class Str_:
 
     def __eq__(self, other):
         return self.str_ == other
+
+    def __and__(self, other):
+        return self.__bool__() == other
+
+    def __or__(self, other):
+        return self.__bool__() != other
+
+    def __init_subclass__(cls, **kwargs):
+        raise SubClassError(cls)
 
     def __getitem__(self, item):
         i = Int_(item)

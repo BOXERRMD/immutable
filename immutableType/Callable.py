@@ -1,14 +1,16 @@
 from .List import List_
 from .Dict import Dict_
-from typing import Callable, Any, Type
+from typing import Callable, Any, Type, final
 from ._error import CallableError, CallableTypeError, CallableKwargsKeyError, CallableKwargsValueTypeError
+from .Subclass import notSubclass
 
 
 
 
 
 
-
+@final
+@notSubclass
 class Callable_:
 
     def __init__(self, _callable: Callable, args_types: list[Type] = [], kwargs_types: dict[str, list[Type]] = {}, is_class: bool = False):
@@ -65,8 +67,6 @@ class Callable_:
             elif type(args[i]) not in self.__args_types.list_:
 
                 raise CallableTypeError(self.__args_types.list_, self.__callable.__name__, args[i], i)
-
-
 
 
     def __check_kwargs(self, kwargs: dict) -> None:
