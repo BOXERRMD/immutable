@@ -5,7 +5,7 @@ setup(
     version="1.2.0",
     description="A immutable type for Python",
     long_description="A library for create immutable 'type' in Python.\n"
-                     "Support types : Str, Int, Bool, Tuple, List, Dict, Callable",
+                     "Support types : Str, Int, Bool, Tuple, List, Dict, Callable, Set",
     author="BOXER",
     author_email="vagabonwalybi@gmail.com",
     maintainer="BOXER",

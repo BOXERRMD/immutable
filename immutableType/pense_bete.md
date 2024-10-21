@@ -4,7 +4,7 @@ Il est possible de :
 - Forcer un type dans une fonction (ne pas accepter d'autres types)
 
 ```python
-from immutable import *
+from immutableType import *
 
 def test(coucou = None):
     coucou.list_ = [True, None]
