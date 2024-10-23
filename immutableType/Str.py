@@ -17,26 +17,6 @@ class Str_:
 
         self.__string = string
 
-    @property
-    def str_(self) -> str:
-        """
-        Return actual value
-        :return: str
-        """
-        return self.__string
-
-    @str_.setter
-    def str_(self, new_value):
-        """
-        Set a new value
-        :param new_value: a string
-        :return: None
-        """
-        if not isinstance(new_value, str):
-            raise StrError(new_value)
-
-        self.__string = new_value
-
     def __str__(self):
         return self.__string
 
@@ -67,3 +47,24 @@ class Str_:
     def __getitem__(self, item):
         i = Int_(item)
         return self.__string[i.int_]
+
+    @property
+    def str_(self) -> str:
+        """
+        Return actual value
+        :return: str
+        """
+        return self.__string
+
+    @str_.setter
+    def str_(self, new_value):
+        """
+        Set a new value
+        :param new_value: a string
+        :return: None
+        """
+        if not isinstance(new_value, str):
+            raise StrError(new_value)
+
+        self.__string = new_value
+

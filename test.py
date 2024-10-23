@@ -1,4 +1,6 @@
 from immutableType import *
 
-class test(Set_):
-    pass
+a = List_([1,2,3])
+
+print(a - [2,3])
+

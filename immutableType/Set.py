@@ -21,6 +21,28 @@ class Set_:
         self.__set = _set
         self.__check_types(_set)
 
+
+    def __iter__(self):
+        return iter(self.__set)
+
+    def __bool__(self):
+        return self.__set != set()
+
+    def __eq__(self, other):
+        return self.__set == other
+
+    def __str__(self):
+        return str(self.__set)
+
+    def __and__(self, other):
+        return self.__bool__() == other
+
+    def __or__(self, other):
+        return self.__bool__() != other
+
+    def __init_subclass__(cls, **kwargs):
+        raise SubClassError(cls)
+
     def __check_types(self, value: set):
 
         if self.__types is None:
@@ -73,24 +95,3 @@ class Set_:
         :return: set
         """
         return self.__set
-
-    def __iter__(self):
-        return iter(self.__set)
-
-    def __bool__(self):
-        return self.__set != set()
-
-    def __eq__(self, other):
-        return self.__set == other
-
-    def __str__(self):
-        return str(self.__set)
-
-    def __and__(self, other):
-        return self.__bool__() == other
-
-    def __or__(self, other):
-        return self.__bool__() != other
-
-    def __init_subclass__(cls, **kwargs):
-        raise SubClassError(cls)

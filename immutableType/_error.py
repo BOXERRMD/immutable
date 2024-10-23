@@ -96,5 +96,5 @@ class SetTypeError(NotMutableTypeError):
 
 class SubClassError(ClassMutableError):
 
-    def __init__(self, cls: classmethod):
+    def __init__(self, cls):
         super().__init__(f"'{cls.__name__}' cannot be subclassed !")

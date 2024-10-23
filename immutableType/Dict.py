@@ -47,6 +47,9 @@ class Dict_:
     def __init_subclass__(cls, **kwargs):
         raise SubClassError(cls)
 
+    def __str__(self):
+        return str(self.__dict)
+
     def _check_types(self, value: dict) -> None:
         """
         Check key and value type of "value" dictionary to self.types

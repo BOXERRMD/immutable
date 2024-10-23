@@ -4,6 +4,7 @@ from .Bool import Bool_
 from .Tuple import Tuple_
 from .List import List_
 from .Dict import Dict_
+from .Set import Set_
 from typing import Callable, Any
 
 
@@ -13,7 +14,7 @@ class Convert:
         Convert all types to immutable
         :param value: Any
         """
-        self.result = self.__make_immutable(value)
+        self.__result = self.__make_immutable(value)
 
     def __make_immutable(self, value):
 
@@ -41,6 +42,9 @@ class Convert:
             # Si la valeur est un boolean, convertir l'élément en immuable
             return Bool_(value)
 
+        elif isinstance(value, set):
+            #si la valeur est un set, convertir l'élément en immuable
+            return Set_(value)
 
         else:
             #sinon retourne la valeur par défaut
@@ -52,12 +56,30 @@ class Convert:
         Get all types immutable
         :return: Callable
         """
-        return self.result
+        return self.__result
 
 
 
+def convert_(is_class=False):
+    """
+    Decorator for convert parameters type
 
+    Convert all parameters passed in function to immutable type.
+    :param is_class: If used on function in class
+    :return: None
+    """
+    def wrapper(func):
+        def convert_all_types(*args, **kwargs):
 
+            if is_class:
+                args = args[1:]
+
+            args = Convert(args).get
+            kwargs = Convert(kwargs).get
+            func(*args, **kwargs.dict_)
+
+        return convert_all_types
+    return wrapper
 
 
 

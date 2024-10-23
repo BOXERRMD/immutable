@@ -65,6 +65,24 @@ class List_:
     def __repr__(self):
         return f"List({self.__list!r})"
 
+    def __add__(self, other: list):
+        if not isinstance(other, list):
+            raise ListError(other)
+
+        self.__check_types(other)
+        self.__list += other
+        return self
+
+    def __iadd__(self, other):
+        return self.__add__(other)
+
+    def __sub__(self, other):
+        self.__list = [i for i in self.__list if i not in other]
+        return self
+
+    def __isub__(self, other):
+        return self.__sub__(other)
+
     def __check_types(self, value: list) -> None:
         """
         Look if all types is in self.__types
