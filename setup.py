@@ -1,11 +1,14 @@
 from setuptools import setup
 
+with open('README.md', 'rt') as readme:
+    long_description = readme.read()
+
 setup(
     name="immutable-Python-Type",
-    version="1.2.1",
+    version="1.2.2",
     description="A immutable type for Python",
-    long_description="A library for create immutable 'type' in Python.\n"
-                     "Support types : Str, Int, Bool, Tuple, List, Dict, Callable, Set",
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author="BOXER",
     author_email="vagabonwalybi@gmail.com",
     maintainer="BOXER",

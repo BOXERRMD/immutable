@@ -14,7 +14,12 @@ class StrError(NotMutableTypeError):
 class IntError(NotMutableTypeError):
 
     def __init__(self, value) -> None:
-        super().__init__(f"Expected a integer, got {type(value).__name__}")
+        super().__init__(f"Expected an integer, got {type(value).__name__}")
+
+class FloatError(NotMutableTypeError):
+
+    def __init__(self, value) -> None:
+        super().__init__(f"Expected a float, got {type(value).__name__}")
 
 class BoolError(NotMutableTypeError):
 

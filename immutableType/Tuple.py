@@ -1,6 +1,6 @@
 from sys import maxsize
 from typing import Any, final
-from ._error import TupleError, SubClassError
+from ._error import TupleError
 from .Subclass import notSubclass
 
 @notSubclass
@@ -13,8 +13,7 @@ class Tuple_:
         :param _tuple: a tuple
         """
 
-        if not isinstance(_tuple, tuple):
-            raise TupleError(_tuple)
+        self.__check_type(_tuple)
 
         self.__tuple = _tuple
 
@@ -42,8 +41,9 @@ class Tuple_:
     def __or__(self, other):
         return self.__bool__() != other
 
-    def __init_subclass__(cls, **kwargs):
-        raise SubClassError(cls)
+    def __check_type(self, value):
+        if not isinstance(value, tuple):
+            raise TupleError(value)
 
     @property
     def tuple_(self) -> tuple:
@@ -60,8 +60,7 @@ class Tuple_:
         :param new_tuple: Any
         :return: None
         """
-        if not isinstance(new_tuple, tuple):
-            raise TupleError(new_tuple)
+        self.__check_type(new_tuple)
 
         self.__tuple = new_tuple
 

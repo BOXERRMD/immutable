@@ -1,4 +1,4 @@
-from ._error import StrError, SubClassError
+from ._error import StrError
 from .Int import Int_
 from typing import final
 from .Subclass import notSubclass
@@ -12,8 +12,7 @@ class Str_:
         :param string: a string
         """
 
-        if not isinstance(string, str):
-            raise StrError(string)
+        self.__check_type(string)
 
         self.__string = string
 
@@ -41,12 +40,29 @@ class Str_:
     def __or__(self, other):
         return self.__bool__() != other
 
-    def __init_subclass__(cls, **kwargs):
-        raise SubClassError(cls)
-
-    def __getitem__(self, item):
+    def __getitem__(self, item: int):
         i = Int_(item)
         return self.__string[i.int_]
+
+    def __add__(self, other: str):
+        self.__check_type(other)
+        self.__string += other
+        return self
+
+    def __iadd__(self, other: str):
+        return self.__add__(other)
+
+    def __sub__(self, other: str):
+        self.__check_type(other)
+        self.__string = self.__string.replace(other, '', 1)
+        return self
+
+    def __isub__(self, other: str):
+        return self.__sub__(other)
+
+    def __check_type(self, value):
+        if not isinstance(value, str):
+            raise StrError(value)
 
     @property
     def str_(self) -> str:
@@ -63,8 +79,7 @@ class Str_:
         :param new_value: a string
         :return: None
         """
-        if not isinstance(new_value, str):
-            raise StrError(new_value)
+        self.__check_type(new_value)
 
         self.__string = new_value
 

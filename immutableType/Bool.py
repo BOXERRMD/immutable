@@ -1,4 +1,4 @@
-from ._error import BoolError, SubClassError
+from ._error import BoolError
 from typing import final
 from .Subclass import notSubclass
 
@@ -12,8 +12,7 @@ class Bool_:
         :param boolean: a boolean
         """
 
-        if not isinstance(boolean, bool):
-            raise BoolError(boolean)
+        self.__check_type(boolean)
 
         self.__boolean = boolean
 
@@ -35,12 +34,12 @@ class Bool_:
     def __or__(self, other):
         return self.__boolean | other
 
-    def __init_subclass__(cls, **kwargs):
-        raise SubClassError(cls)
-
     def __int__(self):
         return int(self.bool_)
 
+    def __check_type(self, value):
+        if not isinstance(value, bool):
+            raise BoolError(value)
 
     @property
     def bool_(self) -> bool:
@@ -57,7 +56,6 @@ class Bool_:
         :param new_value: a boolean
         :return: None
         """
-        if not isinstance(new_value, bool):
-            raise BoolError(new_value)
+        self.__check_type(new_value)
 
         self.__boolean = new_value

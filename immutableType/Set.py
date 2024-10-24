@@ -1,5 +1,5 @@
 from typing import Type, Any, Iterable, final
-from ._error import SetError, SetTypeError, SubClassError
+from ._error import SetError, SetTypeError
 from .Subclass import notSubclass
 
 @notSubclass
@@ -15,8 +15,7 @@ class Set_:
 
         self.__types = types
 
-        if not isinstance(_set, set):
-            raise SetError(_set)
+        self.__check_base_type(_set)
 
         self.__set = _set
         self.__check_types(_set)
@@ -40,9 +39,6 @@ class Set_:
     def __or__(self, other):
         return self.__bool__() != other
 
-    def __init_subclass__(cls, **kwargs):
-        raise SubClassError(cls)
-
     def __check_types(self, value: set):
 
         if self.__types is None:
@@ -65,6 +61,9 @@ class Set_:
         if type(value) not in self.__types:
             raise SetTypeError(self.__types, self.__set, value)
 
+    def __check_base_type(self, value):
+        if not isinstance(value, set):
+            raise SetError(value)
 
     def add(self, value: Any) -> None:
         """

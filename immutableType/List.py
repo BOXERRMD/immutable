@@ -1,6 +1,6 @@
 from sys import maxsize
 from .Int import Int_
-from ._error import ListError, ListTypeError, SubClassError
+from ._error import ListError, ListTypeError
 from typing import Any, Type, final
 from .Subclass import notSubclass
 
@@ -17,8 +17,7 @@ class List_:
 
         self.__types = types
 
-        if not isinstance(_list, list):
-            raise ListError(_list)
+        self.__check_base_type(_list)
 
         self.__list = _list
         self.__check_types(_list)
@@ -56,9 +55,6 @@ class List_:
     def __or__(self, other):
         return self.__bool__() != other
 
-    def __init_subclass__(cls, **kwargs):
-        raise SubClassError(cls)
-
     def __str__(self):
         return str(self.__list)
 
@@ -66,21 +62,21 @@ class List_:
         return f"List({self.__list!r})"
 
     def __add__(self, other: list):
-        if not isinstance(other, list):
-            raise ListError(other)
+        self.__check_base_type(other)
 
         self.__check_types(other)
         self.__list += other
         return self
 
-    def __iadd__(self, other):
+    def __iadd__(self, other: list):
         return self.__add__(other)
 
-    def __sub__(self, other):
+    def __sub__(self, other: list):
+        self.__check_base_type(other)
         self.__list = [i for i in self.__list if i not in other]
         return self
 
-    def __isub__(self, other):
+    def __isub__(self, other: list):
         return self.__sub__(other)
 
     def __check_types(self, value: list) -> None:
@@ -108,6 +104,9 @@ class List_:
         if type(value) not in self.__types:
             raise ListTypeError(self.__types, self.__list, value)
 
+    def __check_base_type(self, value):
+        if not isinstance(value, list):
+            raise ListError(value)
 
     @property
     def list_(self) -> list:
@@ -124,8 +123,7 @@ class List_:
         :param new_value: Any
         :return: None
         """
-        if not isinstance(new_list, list):
-            raise ListError(new_list)
+        self.__check_base_type(new_list)
 
         self.__check_types(new_list)
 

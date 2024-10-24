@@ -1,5 +1,6 @@
 from .Str import Str_
 from .Int import Int_
+from .Float import Float_
 from .Bool import Bool_
 from .Tuple import Tuple_
 from .List import List_

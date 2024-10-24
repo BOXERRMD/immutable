@@ -4,6 +4,7 @@ _package for make immutable all types in Python_
 ### Support types and replaced by:
 
 - int = ``Int_()``
+- float = ``Float_()``
 - str = ``Str_()``
 - bool = ``Bool_()``
 - set = ``Set_()``
@@ -40,6 +41,6 @@ my_int.int_ # property to get the value in 'int' type
 > - ``__int__`` : return the integer value
 > - ``__bool__`` : return **True** if the **value == 1** else **False**
 > - ``__eq__, __and__, __or__, __iand, __ior__`` : basic comparaison
-> - ``__add__, __sub__, __iadd__, __isub__, __mul__, __imul__, __truediv__, __itruediv__, __pow__, __ipow__`` : basic operation
+> - ``__add__, __sub__, __iadd__, __isub__, __mul__, __imul__, __truediv__, __itruediv__, __pow__, __ipow__`` : basic operation _(only int value are accepted for operation. The result of a division is always an integer. Use Float\_ class for more precision.)_
 
 _redaction in progress..._

@@ -1,6 +1,8 @@
 from immutableType import *
 
-a = List_([1,2,3])
+a = Str_('coucou toi !')
 
-print(a - [2,3])
+a = a - 'toi'
+
+print(a)
 

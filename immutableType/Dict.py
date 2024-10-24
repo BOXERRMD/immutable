@@ -1,6 +1,7 @@
 from typing import Any, Union, Type, final
-from ._error import DictError, DictTypeValueError, DictTypeKeyError, DictKeyError, SubClassError
+from ._error import DictError, DictTypeValueError, DictTypeKeyError, DictKeyError
 from .Subclass import notSubclass
+from .List import List_
 
 @notSubclass
 @final
@@ -44,11 +45,38 @@ class Dict_:
     def __or__(self, other):
         return self.__bool__() != other
 
-    def __init_subclass__(cls, **kwargs):
-        raise SubClassError(cls)
-
     def __str__(self):
         return str(self.__dict)
+
+    def __add__(self, other: dict):
+        """
+        Add keys and values ti immutable dict
+        :param other: a dict
+        :return: Dict_
+        """
+        self.__check_type(other)
+        self._check_types(other)
+        for key, value in other.items():
+            self.__dict[key] = value
+        return self
+
+    def __iadd__(self, other: dict):
+        return self.__add__(other)
+
+    def __sub__(self, other: list):
+        """
+        Remove keys in dict if the key is in "other"
+        :param other: list of keys to remove
+        :return: Dict_
+        """
+        other_ = List_(other)
+        for key in other_:
+            if key in self.__dict:
+                del self.__dict[key]
+        return self
+
+    def __isub__(self, other: list):
+        return self.__sub__(other)
 
     def _check_types(self, value: dict) -> None:
         """
@@ -87,6 +115,10 @@ class Dict_:
                 raise e
 
 
+    def __check_type(self, value):
+        if not isinstance(value, dict):
+            raise DictError(value)
+
     @property
     def dict_(self) -> dict:
         """
@@ -102,9 +134,7 @@ class Dict_:
         :param new_value: Any
         :return: None
         """
-        if not isinstance(new_dict, dict):
-            raise DictError(new_dict)
-
+        self.__check_type(new_dict)
         self._check_types(new_dict)
 
         self.__dict = new_dict
