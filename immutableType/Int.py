@@ -89,7 +89,7 @@ class Int_:
         return self.__pow__(other)
 
     def __check_type(self, value):
-        if not isinstance(value, int):
+        if not isinstance(value, (int, Int_)):
             raise IntError(value)
 
     @property

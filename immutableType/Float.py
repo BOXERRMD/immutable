@@ -92,7 +92,7 @@ class Float_:
 
 
     def __check_type(self, value):
-        if not isinstance(value, float):
+        if not isinstance(value, (float, Float_)):
             raise FloatError(value)
 
     @property

@@ -62,7 +62,7 @@ class Set_:
             raise SetTypeError(self.__types, self.__set, value)
 
     def __check_base_type(self, value):
-        if not isinstance(value, set):
+        if not isinstance(value, (set, Set_)):
             raise SetError(value)
 
     def add(self, value: Any) -> None:

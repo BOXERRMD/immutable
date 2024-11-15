@@ -42,7 +42,7 @@ class Tuple_:
         return self.__bool__() != other
 
     def __check_type(self, value):
-        if not isinstance(value, tuple):
+        if not isinstance(value, (tuple, Tuple_)):
             raise TupleError(value)
 
     @property

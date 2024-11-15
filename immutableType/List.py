@@ -105,7 +105,7 @@ class List_:
             raise ListTypeError(self.__types, self.__list, value)
 
     def __check_base_type(self, value):
-        if not isinstance(value, list):
+        if not isinstance(value, (list, List_)):
             raise ListError(value)
 
     @property

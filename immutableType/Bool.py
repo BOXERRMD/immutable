@@ -38,7 +38,7 @@ class Bool_:
         return int(self.bool_)
 
     def __check_type(self, value):
-        if not isinstance(value, bool):
+        if not isinstance(value, (bool, Bool_)):
             raise BoolError(value)
 
     @property
