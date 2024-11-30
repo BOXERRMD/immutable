@@ -11,7 +11,7 @@ from typing import Callable, Any
 class Convert:
     def __init__(self, value: Any):
         """
-        Convert all types to immutable
+        Convert ALL variables to immutable types.
         :param value: Any
         """
         self.__result = self.__make_immutable(value)
