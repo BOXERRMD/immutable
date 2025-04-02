@@ -1,5 +1,8 @@
 from immutableType import *
 
-a = List_(Convert([1,2,3,4]).get)
-print(a)
+a = Dict_({'a': 1, 'b':2, 'c':3})
 
+for key, value in a.items():
+    print(key, value)
+
+a['a'] = 10.0

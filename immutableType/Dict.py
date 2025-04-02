@@ -23,6 +23,8 @@ class Dict_:
         self._check_types(dictionary)
         self.__dict = AttributDict(dictionary)
 
+    def __iter__(self):
+        return self.__dict.keys()
 
     def __getitem__(self, item):
         return self.__dict[item]
@@ -178,6 +180,26 @@ class Dict_:
         self._check_types({key: value})
         self.__dict[key] = value
 
+    def items(self):
+        """
+        D. items() -> a set-like object providing a view on D's items
+        :return: dict_items
+        """
+        return self.__dict.items()
+
+    def keys(self):
+        """
+        D. keys() -> a set-like object providing a view on D's keys
+        :return: dict_keys
+        """
+        return self.__dict.keys()
+
+    def values(self):
+        """
+        D. values() -> an object providing a view on D's values
+        :return: dict_values
+        """
+        return self.__dict.values()
 
 
 class AttributDict(dict):

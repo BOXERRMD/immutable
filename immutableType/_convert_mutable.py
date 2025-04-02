@@ -30,7 +30,8 @@ class Convert:
             # Si la valeur est un tuple, convertir chaque élément en immuable
             return Tuple_(tuple([self.__make_immutable(v) for v in value]))
 
-        elif isinstance(value, int):
+        elif isinstance(type(value), int): # type requis sinon les boléens sont considéré comme des Int_
+            print(type(value))
             # Si la valeur est un integer, convertir l'élément en immuable
             return Int_(value)
 
