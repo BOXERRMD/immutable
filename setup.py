@@ -5,7 +5,7 @@ with open('README.md', 'rt') as readme:
 
 setup(
     name="immutable-Python-Type",
-    version="1.2.2",
+    version="1.2.3",
     description="A immutable type for Python",
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -20,7 +20,6 @@ setup(
     },
     classifiers=[
         "Programming Language :: Python :: 3.11",
-        "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Operating System :: Microsoft :: Windows :: Windows 11",
         "Operating System :: Microsoft :: Windows :: Windows 10"
